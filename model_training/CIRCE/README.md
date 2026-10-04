@@ -25,28 +25,28 @@ A systematic 5-way factorial ablation over 50,000 matched events established CIR
 - **Loss:** Compact-support Kieseler hinge repulsion (`max(0, 1 - d)`), $q_\text{min} = 3.0$, $\text{attr\_weight} = 1.0$, $\text{repul\_weight} = 2.0$, $\beta_\text{suppress} = 0.1$, and $\text{var\_weight} = 0.3$.
 - **Clustering Operating Point:** Greedy clustering at $t_\beta = 0.60, t_d = 0.10$.
 
-## Benchmark Performance on `keepAllParticles` (50,000 events)
+## Benchmark Performance on `keepAllParticles` (50,000 events, Epoch 5 Production Checkpoint)
 
 Evaluated on the full 100-seed `eval-keepall` holdout (1,672,188 targets) under standard benchmark definitions ($15^\circ < \theta < 165^\circ, p_\mathrm{T} > 0.1$ GeV at $t_\beta = 0.60, t_d = 0.10$):
 
 | Metric | Selection / Protocol | Raw Unmerged | Fragment Merged ($t_\mathrm{m}=0.10$) | Benchmark Target | Status |
 |---|---|:---:|:---:|:---:|:---:|
-| **Tracking Efficiency ($N_\mathrm{hits} > 10$, 1-to-1)** | Double Majority ($\ge 50\%$ purity, $\ge 50\%$ eff) | **97.75%** | **97.76%** | $> 90.0\%$ | **Exceeded (+7.76%)** |
-| **Tracking Efficiency ($N_\mathrm{hits} > 10$, Majority)** | Standard IDEA tracks, Purity $> 75\%$ | **97.28%** | **97.05%** | $> 90.0\%$ | **Exceeded (+7.05%)** |
-| **Tracking Efficiency ($N_\mathrm{hits} > 3$, 1-to-1)** | Inclusive recovery down to 4 hits, Double Majority | **96.73%** | **96.73%** | — | High inclusive recovery |
-| **Tracking Efficiency ($N_\mathrm{hits} > 3$, Majority)** | Inclusive recovery, Purity $> 75\%$ | **96.12%** | **95.86%** | — | High inclusive recovery |
-| **Fake Rate ($N_\mathrm{hits} > 10$, 1-to-1 Hungarian)** | Unassigned candidates in 1-to-1 match ($N > 10$) | **6.38%** | **4.71%** | $< 8.0\%$ | **Exceeded (beats 8% target)** |
-| **Fake Rate ($N_\mathrm{hits} > 10$, Majority)** | Spurious fakes without multi-track ($N > 10$) | **0.50%** | **0.41%** | — | Ultra-pure |
-| **Fake Rate ($N_\mathrm{hits} > 3$, 1-to-1 Hungarian)** | Unassigned candidates in 1-to-1 match ($N > 3$) | **10.79%** | **8.18%** | — | Standard `min_hits=3` |
-| **Fake Rate ($N_\mathrm{hits} > 3$, Majority)** | Spurious fakes without multi-track ($N > 3$) | **2.81%** | **2.48%** | — | CLD paper convention |
-| **Multi-Track Merge Rate ($N_\mathrm{hits} > 10$)** | Clusters swallowing $\ge 2$ particles ($>75\%$ eff) | **7.23%** | **7.54%** | — | Clean separation |
-| **Multi-Track Merge Rate ($N_\mathrm{hits} > 3$)** | Clusters swallowing $\ge 2$ particles ($>75\%$ eff) | **12.93%** | **13.40%** | — | Clean separation |
-| **Candidates / Event ($N_\mathrm{hits} > 10$)** | Reconstructed high-purity tracks | **25.46** | **25.04** | — | Benchmark tracks |
-| **Candidates / Event ($N_\mathrm{hits} > 3$)** | Inclusive track candidates | **31.86** | **30.93** | — | Normal multiplicity |
+| **Tracking Efficiency ($N_\mathrm{hits} > 10$, 1-to-1)** | Double Majority ($\ge 50\%$ purity, $\ge 50\%$ eff) | **97.99%** | **98.01%** | $> 90.0\%$ | **Exceeded (+8.01%)** |
+| **Tracking Efficiency ($N_\mathrm{hits} > 10$, Majority)** | Standard IDEA tracks, Purity $> 75\%$ | **97.46%** | **97.25%** | $> 90.0\%$ | **Exceeded (+7.25%)** |
+| **Tracking Efficiency ($N_\mathrm{hits} > 3$, 1-to-1)** | Inclusive recovery down to 4 hits, Double Majority | **97.02%** | **97.02%** | — | High inclusive recovery |
+| **Tracking Efficiency ($N_\mathrm{hits} > 3$, Majority)** | Inclusive recovery, Purity $> 75\%$ | **96.32%** | **96.09%** | — | High inclusive recovery |
+| **Fake Rate ($N_\mathrm{hits} > 10$, 1-to-1 Hungarian)** | Unassigned candidates in 1-to-1 match ($N > 10$) | **5.90%** | **4.36%** | $< 8.0\%$ | **Exceeded (beats 8% target)** |
+| **Fake Rate ($N_\mathrm{hits} > 10$, Majority)** | Spurious fakes without multi-track ($N > 10$) | **0.47%** | **0.39%** | — | Ultra-pure |
+| **Fake Rate ($N_\mathrm{hits} > 3$, 1-to-1 Hungarian)** | Unassigned candidates in 1-to-1 match ($N > 3$) | **10.23%** | **7.80%** | — | Standard `min_hits=3` |
+| **Fake Rate ($N_\mathrm{hits} > 3$, Majority)** | Spurious fakes without multi-track ($N > 3$) | **2.72%** | **2.41%** | — | CLD paper convention |
+| **Multi-Track Merge Rate ($N_\mathrm{hits} > 10$)** | Clusters swallowing $\ge 2$ particles ($>75\%$ eff) | **7.09%** | **7.39%** | — | Clean separation |
+| **Multi-Track Merge Rate ($N_\mathrm{hits} > 3$)** | Clusters swallowing $\ge 2$ particles ($>75\%$ eff) | **12.82%** | **13.27%** | — | Clean separation |
+| **Candidates / Event ($N_\mathrm{hits} > 10$)** | Reconstructed high-purity tracks | **25.48** | **25.09** | — | Benchmark tracks |
+| **Candidates / Event ($N_\mathrm{hits} > 3$)** | Inclusive track candidates | **31.92** | **31.05** | — | Normal multiplicity |
 
 Benchmark plots are available in `plots/`:
-- `plots/head_to_head_keepall_efficiency.png` (and `.pdf`): Tracking Efficiency vs $p_\mathrm{T}$ and Polar Angle $\theta$ comparing Raw Unmerged vs. Fragment Merged ($t_\mathrm{m}=0.10$).
-- `plots/fcc_comprehensive_suite.png` (and `.pdf`): 4-panel comprehensive evaluation suite ($p_\mathrm{T}$ turn-on, angular coverage, hit multiplicity, and grouped side-by-side performance breakdown).
+- `plots/head_to_head_keepall_efficiency.png` (and `head_to_head_keepall_efficiency_epoch05.png`, `head_to_head_keepall_efficiency_epoch04.png`): Tracking Efficiency vs $p_\mathrm{T}$ and Polar Angle $\theta$ comparing Raw Unmerged vs. Fragment Merged ($t_\mathrm{m}=0.10$).
+- `plots/fcc_comprehensive_suite.png` (and `fcc_comprehensive_suite_epoch05.png`, `fcc_comprehensive_suite_epoch04.png`): 4-panel comprehensive evaluation suite ($p_\mathrm{T}$ turn-on, angular coverage, hit multiplicity, and grouped side-by-side performance breakdown).
 
 ## Loss Formulation: CIRCE Champion Loss vs Upstream Baseline (GGTF)
 
