@@ -27,14 +27,17 @@ A systematic 5-way factorial ablation over 50,000 matched events established CIR
 
 ## Benchmark Performance on `keepAllParticles` (50,000 events, Epoch 5 Production Checkpoint)
 
-Evaluated on the full 100-seed `eval-keepall` holdout (1,672,188 targets) under standard benchmark definitions ($15^\circ < \theta < 165^\circ, p_\mathrm{T} > 0.1$ GeV at $t_\beta = 0.60, t_d = 0.10$):
+Evaluated across the full 100-seed `eval-keepall` holdout (1,672,188 targets, $15^\circ < \theta < 165^\circ, p_\mathrm{T} > 0.1$ GeV at champion operating point $t_\beta = 0.60, t_d = 0.10$).
+
+### 1. Primary Benchmark: Inclusive Targets ($\text{genStatus} \in [0, 1]$ — Andrea's Standard Evaluation)
+Includes all $1,115,146$ targets with $N_\mathrm{hits} > 10$ ($1,169,642$ with $N_\mathrm{hits} > 3$), encompassing both prompt primaries and detector-material Geant4 secondaries:
 
 | Metric | Selection / Protocol | Raw Unmerged | Fragment Merged ($t_\mathrm{m}=0.10$) | Benchmark Target | Status |
 |---|---|:---:|:---:|:---:|:---:|
-| **Tracking Efficiency ($N_\mathrm{hits} > 10$, 1-to-1)** | Double Majority ($\ge 50\%$ purity, $\ge 50\%$ eff) | **97.99%** | **98.01%** | $> 90.0\%$ | **Exceeded (+8.01%)** |
-| **Tracking Efficiency ($N_\mathrm{hits} > 10$, Majority)** | Standard IDEA tracks, Purity $> 75\%$ | **97.46%** | **97.25%** | $> 90.0\%$ | **Exceeded (+7.25%)** |
-| **Tracking Efficiency ($N_\mathrm{hits} > 3$, 1-to-1)** | Inclusive recovery down to 4 hits, Double Majority | **97.02%** | **97.02%** | — | High inclusive recovery |
-| **Tracking Efficiency ($N_\mathrm{hits} > 3$, Majority)** | Inclusive recovery, Purity $> 75\%$ | **96.32%** | **96.09%** | — | High inclusive recovery |
+| **Tracking Efficiency ($N_\mathrm{hits} > 10$, 1-to-1)** | Double Majority ($\ge 50\%$ purity, $\ge 50\%$ eff) | **95.29%** | **95.34%** | $> 90.0\%$ | **Exceeded (+5.34%)** |
+| **Tracking Efficiency ($N_\mathrm{hits} > 10$, Majority)** | Standard IDEA tracks, Purity $> 75\%$ | **94.29%** | **93.70%** | $> 90.0\%$ | **Exceeded (+3.70%)** |
+| **Tracking Efficiency ($N_\mathrm{hits} > 3$, 1-to-1)** | Inclusive recovery down to 4 hits, Double Majority | **93.72%** | **93.74%** | — | High inclusive recovery |
+| **Tracking Efficiency ($N_\mathrm{hits} > 3$, Majority)** | Inclusive recovery, Purity $> 75\%$ | **92.03%** | **91.39%** | — | High inclusive recovery |
 | **Fake Rate ($N_\mathrm{hits} > 10$, 1-to-1 Hungarian)** | Unassigned candidates in 1-to-1 match ($N > 10$) | **5.90%** | **4.36%** | $< 8.0\%$ | **Exceeded (beats 8% target)** |
 | **Fake Rate ($N_\mathrm{hits} > 10$, Majority)** | Spurious fakes without multi-track ($N > 10$) | **0.47%** | **0.39%** | — | Ultra-pure |
 | **Fake Rate ($N_\mathrm{hits} > 3$, 1-to-1 Hungarian)** | Unassigned candidates in 1-to-1 match ($N > 3$) | **10.23%** | **7.80%** | — | Standard `min_hits=3` |
@@ -44,9 +47,17 @@ Evaluated on the full 100-seed `eval-keepall` holdout (1,672,188 targets) under 
 | **Candidates / Event ($N_\mathrm{hits} > 10$)** | Reconstructed high-purity tracks | **25.48** | **25.09** | — | Benchmark tracks |
 | **Candidates / Event ($N_\mathrm{hits} > 3$)** | Inclusive track candidates | **31.92** | **31.05** | — | Normal multiplicity |
 
+### 2. Prompt Primary Reference ($\text{genStatus} == 1$)
+Restricting strictly to prompt primary particles from the primary vertex ($876,590$ targets with $N_\mathrm{hits} > 10$):
+* **Tracking Efficiency ($N_\mathrm{hits} > 10$, 1-to-1)**: **97.99%** (Raw) / **98.01%** (Merged)
+* **Tracking Efficiency ($N_\mathrm{hits} > 10$, Majority)**: **97.46%** (Raw) / **97.25%** (Merged)
+* **Tracking Efficiency ($N_\mathrm{hits} > 3$, 1-to-1)**: **97.02%** (Raw) / **97.02%** (Merged)
+* **Tracking Efficiency ($N_\mathrm{hits} > 3$, Majority)**: **96.32%** (Raw) / **96.09%** (Merged)
+
 Benchmark plots are available in `plots/`:
-- `plots/head_to_head_keepall_efficiency.png` (and `head_to_head_keepall_efficiency_epoch05.png`, `head_to_head_keepall_efficiency_epoch04.png`): Tracking Efficiency vs $p_\mathrm{T}$ and Polar Angle $\theta$ comparing Raw Unmerged vs. Fragment Merged ($t_\mathrm{m}=0.10$).
-- `plots/fcc_comprehensive_suite.png` (and `fcc_comprehensive_suite_epoch05.png`, `fcc_comprehensive_suite_epoch04.png`): 4-panel comprehensive evaluation suite ($p_\mathrm{T}$ turn-on, angular coverage, hit multiplicity, and grouped side-by-side performance breakdown).
+- `plots/epoch04_vs_epoch05_comparison.png` (and `.pdf`): Direct overlay comparison of Epoch 4 vs. Epoch 5 across all kinematic variables ($p_\mathrm{T}, \theta, N_\mathrm{hits}$) and performance summary bars.
+- `plots/fcc_comprehensive_suite_epoch05.png` (and `fcc_comprehensive_suite_epoch04.png`): 4-panel comprehensive evaluation suite ($p_\mathrm{T}$ turn-on, angular coverage, hit multiplicity, and grouped side-by-side performance breakdown).
+- `plots/head_to_head_keepall_efficiency_epoch05.png` (and `head_to_head_keepall_efficiency_epoch04.png`): 2-panel tracking efficiency curves ($p_\mathrm{T}$ and polar angle $\theta$) comparing Raw Unmerged vs. Fragment Merged ($t_\mathrm{m}=0.10$).
 
 ## Loss Formulation: CIRCE Champion Loss vs Upstream Baseline (GGTF)
 
